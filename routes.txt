@@ -12,6 +12,7 @@
   GET|HEAD  dashboard ........................................................................................................................................................................ dashboard
   GET|HEAD  forgot-password .................................................................................................... password.request › Laravel\Fortify › PasswordResetLinkController@create
   POST      forgot-password ....................................................................................................... password.email › Laravel\Fortify › PasswordResetLinkController@store
+  GET|HEAD  livewire-test/index ........................................................................................................................................... LivewireTestController@index
   GET|HEAD  livewire/livewire.js ................................................................................................................ Livewire\Controllers › LivewireJavaScriptAssets@source
   GET|HEAD  livewire/livewire.js.map .............................................................................................................. Livewire\Controllers › LivewireJavaScriptAssets@maps
   POST      livewire/message/{name} .................................................................................................... livewire.message › Livewire\Controllers › HttpConnectionHandler
@@ -25,22 +26,13 @@
   POST      reset-password ............................................................................................................. password.update › Laravel\Fortify › NewPasswordController@store
   GET|HEAD  reset-password/{token} ..................................................................................................... password.reset › Laravel\Fortify › NewPasswordController@create
   GET|HEAD  sanctum/csrf-cookie ...................................................................................................... sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
-  GET|HEAD  two-factor-challenge ................................................................................... two-factor.login › Laravel\Fortify › TwoFactorAuthenticatedSessionController@create
-  POST      two-factor-challenge ....................................................................................................... Laravel\Fortify › TwoFactorAuthenticatedSessionController@store
   GET|HEAD  user/confirm-password ................................................................................................................. Laravel\Fortify › ConfirmablePasswordController@show
   POST      user/confirm-password ............................................................................................. password.confirm › Laravel\Fortify › ConfirmablePasswordController@store
   GET|HEAD  user/confirmed-password-status ............................................................................ password.confirmation › Laravel\Fortify › ConfirmedPasswordStatusController@show
-  POST      user/confirmed-two-factor-authentication ........................................................... two-factor.confirm › Laravel\Fortify › ConfirmedTwoFactorAuthenticationController@store
   PUT       user/password ........................................................................................................... user-password.update › Laravel\Fortify › PasswordController@update
   GET|HEAD  user/profile ................................................................................................................. profile.show › Laravel\Jetstream › UserProfileController@show
   PUT       user/profile-information ........................................................................... user-profile-information.update › Laravel\Fortify › ProfileInformationController@update
-  POST      user/two-factor-authentication ............................................................................... two-factor.enable › Laravel\Fortify › TwoFactorAuthenticationController@store
-  DELETE    user/two-factor-authentication ............................................................................ two-factor.disable › Laravel\Fortify › TwoFactorAuthenticationController@destroy
-  GET|HEAD  user/two-factor-qr-code .............................................................................................. two-factor.qr-code › Laravel\Fortify › TwoFactorQrCodeController@show
-  GET|HEAD  user/two-factor-recovery-codes .................................................................................. two-factor.recovery-codes › Laravel\Fortify › RecoveryCodeController@index
-  POST      user/two-factor-recovery-codes .............................................................................................................. Laravel\Fortify › RecoveryCodeController@store
-  GET|HEAD  user/two-factor-secret-key ..................................................................................... two-factor.secret-key › Laravel\Fortify › TwoFactorSecretKeyController@show
   POST      {locale}/livewire/message/{name} ................................................................................. livewire.message-localized › Livewire\Controllers › HttpConnectionHandler
 
-                                                                                                                                                                                     Showing [42] routes
+                                                                                                                                                                                     Showing [34] routes
 
