@@ -10,8 +10,6 @@
         livewireテスト <br>
         <span class="text-blue-600">register</span>
     </div>
-
-
     <br>
     @livewire('register')
 
