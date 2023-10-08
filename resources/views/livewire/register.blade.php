@@ -8,7 +8,7 @@
         @enderror
         <br>
         <label for="email">メールアドレス</label>
-        <input type="email" id="email" wire:model="email">
+        <input type="email" id="email" wire:model.lazy="email">
         <br>
         @error('email')
             <div class="text-red-400">{{ $message }}</div>
