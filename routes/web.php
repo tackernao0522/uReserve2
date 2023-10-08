@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlpineTestController;
 use App\Http\Controllers\LivewireTestController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,5 @@ Route::controller(LivewireTestController::class)->prefix('livewire-test')
         Route::get('index', 'index')->name('index');
         Route::get('register', 'register')->name('register');
     });
+
+Route::get('alpine-test/index', [AlpineTestController::class, 'index']);

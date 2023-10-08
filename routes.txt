@@ -8,6 +8,7 @@
   POST      _ignition/execute-solution .................................................................................. ignition.executeSolution › Spatie\LaravelIgnition › ExecuteSolutionController
   GET|HEAD  _ignition/health-check .............................................................................................. ignition.healthCheck › Spatie\LaravelIgnition › HealthCheckController
   POST      _ignition/update-config ........................................................................................... ignition.updateConfig › Spatie\LaravelIgnition › UpdateConfigController
+  GET|HEAD  alpine-test/index .............................................................................................................................................. AlpineTestController@index
   GET|HEAD  api/user .................................................................................................................................................................................. 
   GET|HEAD  dashboard ....................................................................................................................................................................... dashboard
   GET|HEAD  forgot-password ................................................................................................... password.request › Laravel\Fortify › PasswordResetLinkController@create
@@ -35,5 +36,5 @@
   PUT       user/profile-information .......................................................................... user-profile-information.update › Laravel\Fortify › ProfileInformationController@update
   POST      {locale}/livewire/message/{name} ................................................................................ livewire.message-localized › Livewire\Controllers › HttpConnectionHandler
 
-                                                                                                                                                                                    Showing [35] routes
+                                                                                                                                                                                    Showing [36] routes
 
