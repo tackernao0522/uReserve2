@@ -472,35 +472,12 @@
                     @yield('message')
                 </p>
 
-                @can('admin')
-                    <a href="{{ route('admin.home') }}">
-                        <button
-                            class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-                            {{ __('Go to Admin Home') }}
-                        </button>
-                    </a>
-                @elsecan('manager-higher')
-                    <a href="{{ route('events.index') }}">
-                        <button
-                            class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-                            {{ __('Go to Manager Home') }}
-                        </button>
-                    </a>
-                @elsecan('user-higher')
-                    <a href="{{ url('/') }}">
-                        <button
-                            class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-                            {{ __('Go to User Home') }}
-                        </button>
-                    </a>
-                @else
-                    <a href="{{ url('/') }}">
-                        <button
-                            class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-                            {{ __('Go Home') }}
-                        </button>
-                    </a>
-                @endcan
+                <a href="{{ app('router')->has('home') ? route('home') : url('/') }}">
+                    <button
+                        class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
+                        {{ __('Go Home') }}
+                    </button>
+                </a>
             </div>
         </div>
 
