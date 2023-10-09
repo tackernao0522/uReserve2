@@ -4,12 +4,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <div class="w-20 shrink-0 flex items-center">
-                        <a href="{{ route('dashboard') }}">
-                            <x-jet-application-mark class="block h-9 w-auto" />
-                        </a>
-                    </div>
+                <div class="w-20 shrink-0 flex items-center">
+                    <a href="{{ route('dashboard') }}">
+                        <x-jet-application-mark class="block h-9 w-auto" />
+                    </a>
                 </div>
 
                 <!-- Navigation Links -->
