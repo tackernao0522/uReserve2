@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="max-w-2xl mx-auto">
+                <div class="max-w-2xl py-4 mx-auto">
                     <x-jet-validation-errors class="mb-4" />
 
                     @if (session('status'))
@@ -25,26 +25,44 @@
                                 :value="old('event_name')" autofocus />
                         </div>
 
+                        <div class="mt-4">
+                            <x-jet-label for="information" value="イベント詳細" />
+                            <x-textarea row="3" id="information" class="block mt-1 w-full"
+                                name="information">{{ old('information') }}</x-textarea>
+                        </div>
+
                         <div class="md:flex justify-between">
                             <div class="mt-4">
                                 <x-jet-label for="event_date" value="イベント日付" />
-                                <x-jet-input id="event_date" class="block mt-1 w-full" type="text"
-                                    name="event_date" />
+                                <x-jet-input id="event_date" class="block mt-1 w-full" type="text" name="event_date"
+                                    :value="old('event_date')" />
                             </div>
 
                             <div class="mt-4">
                                 <x-jet-label for="start_time" value="開始時間" />
-                                <x-jet-input id="start_time" class="block mt-1 w-full" type="text"
-                                    name="start_time" />
+                                <x-jet-input id="start_time" class="block mt-1 w-full" type="text" name="start_time"
+                                    :value="old('start_time')" />
                             </div>
 
                             <div class="mt-4">
                                 <x-jet-label for="end_time" value="終了時間" />
-                                <x-jet-input id="end_time" class="block mt-1 w-full" type="text" name="end_time" />
+                                <x-jet-input id="end_time" class="block mt-1 w-full" type="text" name="end_time"
+                                    :value="old('end_time')" />
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
+                        <div class="md:flex justify-between items-end">
+                            <div class="mt-4">
+                                <x-jet-label for="max_people" value="定員数" />
+                                <x-jet-input id="max_people" class="block mt-1 w-full" type="number" name="max_people"
+                                    :value="old('max_people')" />
+                            </div>
+                            <div class="flex space-x-4 justify-around">
+                                <input type="radio" name="is_visible" value="1"
+                                    {{ old('is_visible') == 1 ? 'checked' : '' }}>表示
+                                <input type="radio" name="is_visible" value="0"
+                                    {{ old('is_visible') == 0 ? 'checked' : '' }}>非表示
+                            </div>
                             <x-jet-button class="ml-4">
                                 新規登録
                             </x-jet-button>
