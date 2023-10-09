@@ -13,4 +13,9 @@ class EventController extends Controller
 
         return view('manager.events.index', compact('events'));
     }
+
+    public function create()
+    {
+        return view('manager.events.create');
+    }
 }
