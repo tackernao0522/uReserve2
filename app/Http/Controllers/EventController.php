@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Models\Event;
+use App\Services\EventService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,17 +25,17 @@ class EventController extends Controller
 
     public function store(StoreEventRequest $request)
     {
-        $start = $request['event_date'] . ' ' . $request['start_time'];
-        $startDate = Carbon::createFromFormat('Y-m-d H:i', $start);
-
-        $end = $request['event_date'] . ' ' . $request['end_time'];
-        $endDate = Carbon::createFromFormat('Y-m-d H:i', $end);
+        $dateTimeData = EventService::parseDateTime(
+            $request->input('event_date'),
+            $request->input('start_time'),
+            $request->input('end_time')
+        );
 
         Event::create([
             'name' => $request['event_name'],
             'information' => $request['information'],
-            'start_date' => $startDate,
-            'end_date' => $endDate,
+            'start_date' => $dateTimeData['start_date'],
+            'end_date' => $dateTimeData['end_date'],
             'max_people' => $request['max_people'],
             'is_visible' => $request['is_visible'],
         ]);
