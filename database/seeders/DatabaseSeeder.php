@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [UsersTableSeeder::class],
         );
-        Event::factory(100)->create();
+        Event::factory(500)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
