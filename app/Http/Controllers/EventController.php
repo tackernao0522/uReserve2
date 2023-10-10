@@ -25,7 +25,20 @@ class EventController extends Controller
 
     public function store(StoreEventRequest $request)
     {
-        $dateTimeData = EventService::parseDateTime(
+        $check = EventService::checkEventDuplication(
+            $request['event_date'],
+            $request['start_time'],
+            $request['end_time']
+        );
+
+        if ($check) {
+            // 存在したら
+            session()->flash('status', 'この時間帯は既に他の予約が存在します。');
+
+            return redirect()->back();
+        }
+
+        $dateTimeData = EventService::joinDateAndTime(
             $request->input('event_date'),
             $request->input('start_time'),
             $request->input('end_time')
