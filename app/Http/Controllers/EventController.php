@@ -57,4 +57,11 @@ class EventController extends Controller
 
         return to_route('events.index');
     }
+
+    public function show($id)
+    {
+        $event = Event::findOrFail($id);
+
+        return view('manager.events.show', compact('event'));
+    }
 }
