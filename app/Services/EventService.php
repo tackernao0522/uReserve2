@@ -10,23 +10,25 @@ class EventService
     public static function checkEventDuplication($eventDate, $startTime, $endTime)
     {
         return DB::table('events')
+            ->whereDate('start_date', $eventDate) // 日にち
+            ->whereTime('end_date', '>', $startTime)
+            ->whereTime('start_date', '<', $endTime)
+            ->exists(); // 存在確認
+    }
+
+    public static function countEventDuplication($eventDate, $startTime, $endTime)
+    {
+        return DB::table('events')
             ->whereDate('start_date', $eventDate)
             ->whereTime('end_date', '>', $startTime)
             ->whereTime('start_date', '<', $endTime)
-            ->exists();
+            ->count();
     }
 
-    public static function joinDateAndTime($eventDate, $startTime, $endTime)
+    public static function joinDateAndTime($date, $time)
     {
-        $start = $eventDate . ' ' . $startTime;
-        $startDate = Carbon::createFromFormat('Y-m-d H:i', $start);
+        $join = $date . ' ' . $time;
 
-        $end = $eventDate . ' ' . $endTime;
-        $endDate = Carbon::createFromFormat('Y-m-d H:i', $end);
-
-        return [
-            'start_date' => $startDate,
-            'end_date' => $endDate,
-        ];
+        return Carbon::createFromFormat('Y-m-d H:i', $join);
     }
 }
