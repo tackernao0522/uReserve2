@@ -75,4 +75,27 @@ class EventController extends Controller
             )
         );
     }
+
+    public function edit($id)
+    {
+        $event = Event::findOrFail($id);
+        $eventDate = $event->eventDate;
+        $startTime = $event->startTime;
+        $endTime = $event->endTime;
+
+        return view(
+            'manager.events.edit',
+            compact(
+                'event',
+                'eventDate',
+                'startTime',
+                'endTime'
+            )
+        );
+    }
+
+    public function update(Request $request, $id)
+    {
+        
+    }
 }
