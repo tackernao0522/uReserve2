@@ -114,7 +114,7 @@ class EventController extends Controller
 
             session()->flash('status', 'この時間帯は既に他の予約が存在します。');
 
-            return view('manager.events.edit', compact(
+            return to_route('events.edit', compact(
                 'event',
                 'eventDate',
                 'startTime',
