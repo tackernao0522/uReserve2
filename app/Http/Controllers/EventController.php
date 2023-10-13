@@ -14,7 +14,11 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = DB::table('events')->orderBy('start_date', 'ASC')->paginate(10);
+        $today = Carbon::today();
+
+        $events = DB::table('events')
+            ->whereDate('start_date', '>=', $today)
+            ->orderBy('start_date', 'ASC')->paginate(10);
 
         return view('manager.events.index', compact('events'));
     }
@@ -80,22 +84,27 @@ class EventController extends Controller
         );
     }
 
-    public function edit($id)
+    public function edit(Event $event)
     {
-        $event = Event::findOrFail($id);
-        $eventDate = $event->editEventDate;
-        $startTime = $event->startTime;
-        $endTime = $event->endTime;
+        if ($event->eventDate >= Carbon::today()->format('Y年m月d日')) {
+            $event = Event::findOrFail($event->id);
+            $eventDate = $event->editEventDate;
+            $startTime = $event->startTime;
+            $endTime = $event->endTime;
 
-        return view(
-            'manager.events.edit',
-            compact(
-                'event',
-                'eventDate',
-                'startTime',
-                'endTime'
-            )
-        );
+            return view(
+                'manager.events.edit',
+                compact(
+                    'event',
+                    'eventDate',
+                    'startTime',
+                    'endTime'
+                )
+            );
+        } else {
+            session()->flash('status', '過去のイベントは更新できません。');
+            return to_route('events.index');
+        }
     }
 
     public function update(UpdateEventRequest $request, $id)
@@ -143,5 +152,15 @@ class EventController extends Controller
         session()->flash('status', '更新しました。');
 
         return to_route('events.index');
+    }
+
+    public function past()
+    {
+        $today = Carbon::today();
+        $events = DB::table('events')->whereDate('start_date', '<', $today)
+            ->orderBy('start_date', 'DESC')
+            ->paginate(10);
+
+        return view('manager.events.past', compact('events'));
     }
 }
