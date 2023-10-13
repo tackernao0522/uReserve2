@@ -84,10 +84,11 @@ class EventController extends Controller
         );
     }
 
-    public function edit(Event $event)
+    public function edit($id)
     {
+        $event = Event::findOrFail($id);
         if ($event->eventDate >= Carbon::today()->format('Y年m月d日')) {
-            $event = Event::findOrFail($event->id);
+            // $event = Event::findOrFail($event->id);
             $eventDate = $event->editEventDate;
             $startTime = $event->startTime;
             $endTime = $event->endTime;
