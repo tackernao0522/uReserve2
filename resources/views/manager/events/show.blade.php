@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pt-4 pb-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="max-w-2xl py-4 mx-auto">
@@ -47,7 +47,7 @@
                         <div class="md:flex justify-between items-end">
                             <div class="mt-4">
                                 <x-jet-label for="max_people" value="定員数" />
-                                {{ old('max_people', $event->max_people) }}
+                                {{ $event->max_people }}
                             </div>
                             <div class="flex space-x-4 justify-around">
                                 {{ $event->is_visible ? '表示中' : '非表示' }}
@@ -59,6 +59,20 @@
                             @endif
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="max-w-2xl py-4 mx-auto">
+                    @if (!$users->isEmpty())
+                        予約状況
+                    @else
+                        予約はありません。
+                    @endif
                 </div>
             </div>
         </div>
