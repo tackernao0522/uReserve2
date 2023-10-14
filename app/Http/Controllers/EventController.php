@@ -16,11 +16,16 @@ class EventController extends Controller
     {
         $today = Carbon::today();
 
+        $reservedPeople = DB::table('reservations')
+            ->select('event_id', DB::raw('sum(number_of_people) as number_of_people'))
+            ->groupBy('event_id');
+        // dd($reservedPeople);
+
         $events = DB::table('events')
             ->whereDate('start_date', '>=', $today)
             ->orderBy('start_date', 'ASC')->paginate(10);
 
-        return view('manager.events.index', compact('events'));
+        return view('manager.events.index', compact('events', 'reservedPeople'));
     }
 
     public function create()
