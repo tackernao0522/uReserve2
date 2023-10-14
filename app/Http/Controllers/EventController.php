@@ -166,7 +166,15 @@ class EventController extends Controller
     public function past()
     {
         $today = Carbon::today();
-        $events = DB::table('events')->whereDate('start_date', '<', $today)
+
+        $reservedPeople = DB::table('reservations')
+            ->select('event_id', DB::raw('sum(number_of_people) as number_of_people'))
+            ->groupBy('event_id');
+
+        $events = DB::table('events')
+            ->leftJoinSub($reservedPeople, 'reservedPeople', function ($join) {
+                $join->on('events.id', '=', 'reservedPeople.event_id');
+            })->whereDate('start_date', '<', $today)
             ->orderBy('start_date', 'DESC')
             ->paginate(10);
 
