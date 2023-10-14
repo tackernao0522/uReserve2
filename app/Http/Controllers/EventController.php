@@ -22,10 +22,13 @@ class EventController extends Controller
         // dd($reservedPeople);
 
         $events = DB::table('events')
+            ->leftJoinSub($reservedPeople, 'reservedPeople', function ($join) {
+                $join->on('events.id', '=', 'reservedPeople.event_id');
+            })
             ->whereDate('start_date', '>=', $today)
             ->orderBy('start_date', 'ASC')->paginate(10);
 
-        return view('manager.events.index', compact('events', 'reservedPeople'));
+        return view('manager.events.index', compact('events'));
     }
 
     public function create()
