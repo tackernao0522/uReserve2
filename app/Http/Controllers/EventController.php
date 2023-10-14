@@ -78,6 +78,19 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
         $users = $event->users;
+
+        $reservations = [];
+
+        foreach ($users as $user) {
+            $reservedInfo = [
+                'name' => $user->name,
+                'number_of_people' => $user->pivot->number_of_people,
+                'canceled_date' => $user->pivot->canceled_date,
+            ];
+
+            array_push($reservations, $reservedInfo);
+        }
+
         $eventDate = $event->editEventDate;
         $startTime = $event->startTime;
         $endTime = $event->endTime;
@@ -87,6 +100,7 @@ class EventController extends Controller
             compact(
                 'event',
                 'users',
+                'reservations',
                 'eventDate',
                 'startTime',
                 'endTime'

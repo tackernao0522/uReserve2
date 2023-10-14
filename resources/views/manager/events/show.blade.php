@@ -70,6 +70,12 @@
                 <div class="max-w-2xl py-4 mx-auto">
                     @if (!$users->isEmpty())
                         予約状況
+                        @foreach ($reservations as $reservation)
+                            @if (is_null($reservation['canceled_date']))
+                                {{ $reservation['name'] }}
+                                {{ $reservation['number_of_people'] }}
+                            @endif
+                        @endforeach
                     @else
                         予約はありません。
                     @endif
