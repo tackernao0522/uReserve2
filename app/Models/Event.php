@@ -40,4 +40,10 @@ class Event extends Model
             get: fn () => Carbon::parse($this->start_date)->format('Y-m-d')
         );
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'reservations')
+            ->withPivot('id', 'number_of_people', 'canceled_date');
+    }
 }
