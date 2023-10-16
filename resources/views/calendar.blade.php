@@ -20,7 +20,6 @@
 
 <body class="font-sans antialiased">
     @livewire('calendar')
-    <x-jet-input id="calendar" class="block mt-1 w-full" type="text" name="calendar" />
     @livewireScripts
 </body>
 
