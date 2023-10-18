@@ -16,7 +16,12 @@
                     {{ $currentWeek[$i]['dayOfWeek'] }}
                 </div>
                 @for ($j = 0; $j < 21; $j++)
-                    <div class="py-1 px-2 h-8 border border-gray-200 text-center">10:00</div>
+                    @if ($events->isNotEmpty())
+                        <div class="py-1 px-2 h-8 border border-gray-200 text-center">{{ \Constant::EVENT_TIME[$j] }}
+                        </div>
+                    @else
+                        <div class="py-1 px-2 h-8 border border-gray-200 text-center"></div>
+                    @endif
                 @endfor
             </div>
         @endfor
