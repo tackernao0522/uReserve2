@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Event extends Model
 {
@@ -45,5 +46,27 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class, 'reservations')
             ->withPivot('id', 'number_of_people', 'canceled_date');
+    }
+
+    public function scopeUpcomingEvents(Builder $query)
+    {
+        return $query
+            ->select(['events.*'])
+            ->leftJoinSub(Reservation::reservedPeople(), 'reservedPeople', function ($join) {
+                $join->on('events.id', '=', 'reservedPeople.event_id');
+            })
+            ->whereDate('start_date', '>=', Carbon::today())
+            ->orderBy('start_date', 'ASC');
+    }
+
+    public function scopePastEvents(Builder $query)
+    {
+        return $query
+            ->select(['events.*'])
+            ->leftJoinSub(Reservation::reservedPeople(), 'reservedPeople', function ($join) {
+                $join->on('events.id', '=', 'reservedPeople.event_id');
+            })
+            ->whereDate('start_date', '<', Carbon::today())
+            ->orderBy('start_date', 'DESC');
     }
 }

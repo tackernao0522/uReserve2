@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,10 +18,7 @@ class ReservationController extends Controller
     {
         $event = Event::findOrFail($id);
 
-        $reservedPeople = DB::table('reservations')
-            ->select('event_id', DB::raw('sum(number_of_people) as number_of_people'))
-            ->whereNull('canceled_date')
-            ->groupBy('event_id')
+        $reservedPeople = Reservation::reservedPeople()
             ->having('event_id', $event->id)
             ->first();
 
