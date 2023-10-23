@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -34,10 +35,7 @@ class EventService
 
     public static function getWeekEvents($startDate, $endDate)
     {
-        $reservedPeople = DB::table('reservations')
-            ->select('event_id', DB::raw('sum(number_of_people) as number_of_people'))
-            ->whereNotNull('canceled_date')
-            ->groupBy('event_id');
+        $reservedPeople = Reservation::reservedPeople();
 
         return DB::table('events')
             ->leftJoinSub($reservedPeople, 'reservedPeople', function ($join) {

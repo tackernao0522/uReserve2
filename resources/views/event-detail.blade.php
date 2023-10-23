@@ -17,7 +17,8 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('events.edit', $event->id) }}" method="GET">
+                    <form action="{{ route('events.reserve', $event->id) }}" method="POST">
+                        @csrf
                         <div>
                             <x-jet-label for="event_name" value="イベント名" />
                             {{ $event->name }}
@@ -49,19 +50,26 @@
                                 <x-jet-label for="max_people" value="定員数" />
                                 {{ $event->max_people }}
                             </div>
-                            <div class="mt-4">
-                                <x-jet-label for="reserved_people" value="予約人数" />
-                                <select name="reserved_people">
-                                    @for ($i = 1; $i <= $reservablePeople; $i++)
-                                        <option value="{{ $i }}"
-                                            {{ old('reserved_people') == $i ? 'selected' : '' }}>{{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <x-jet-button class="ml-4">
-                                予約する
-                            </x-jet-button>
+                            @if ($reservablePeople <= 0)
+                                <div class="mt-4 text-red-600">予約は満了です。</div>
+                            @else
+                                <div class="mt-4">
+                                    <x-jet-label for="reserved_people" value="予約人数" />
+                                    <select name="reserved_people">
+                                        @for ($i = 1; $i <= $reservablePeople; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ old('reserved_people') == $i ? 'selected' : '' }}>{{ $i }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            @endif
+                            <input type="hidden" name="id" value="{{ $event->id }}">
+                            @if ($reservablePeople > 0)
+                                <x-jet-button class="ml-4">
+                                    予約する
+                                </x-jet-button>
+                            @endif
                         </div>
                     </form>
                 </div>
