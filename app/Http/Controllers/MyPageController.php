@@ -19,4 +19,9 @@ class MyPageController extends Controller
 
         return view('mypage/index', compact('fromTodayEvents', 'pastEvents'));
     }
+
+    public function show($id)
+    {
+        
+    }
 }
