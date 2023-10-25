@@ -24,4 +24,10 @@ class Reservation extends Model
             ->whereNull('canceled_date')
             ->groupBy('event_id');
     }
+
+    public function scopeUserAndEvent($query, $userId, $eventId)
+    {
+        return $query->where('user_id', $userId)
+            ->where('event_id', $eventId);
+    }
 }

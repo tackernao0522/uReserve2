@@ -37,8 +37,7 @@ class MyPageController extends Controller
 
     public function cancel($id)
     {
-        $reservation = Reservation::where('user_id', Auth::id())
-            ->where('event_id', '=', $id)
+        $reservation = Reservation::userAndEvent(Auth::id(), $id)
             ->latest()
             ->first();
 

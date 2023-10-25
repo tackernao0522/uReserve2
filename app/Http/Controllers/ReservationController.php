@@ -30,7 +30,12 @@ class ReservationController extends Controller
             $reservablePeople = $event->max_people;
         }
 
-        return view('event-detail', compact('event', 'reservablePeople'));
+        $isReserved = Reservation::userAndEvent(Auth::id(), $id)
+            ->where('canceled_date', '=', null)
+            ->latest()
+            ->first();
+
+        return view('event-detail', compact('event', 'reservablePeople', 'isReserved'));
     }
 
     public function reserve(Request $request)

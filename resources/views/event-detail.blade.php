@@ -62,18 +62,22 @@
                                             </option>
                                         @endfor
                                     </select>
-                                </div>
                             @endif
+                        </div>
+                        @if ($isReserved === null)
                             <input type="hidden" name="id" value="{{ $event->id }}">
                             @if ($reservablePeople > 0)
                                 <x-jet-button class="ml-4">
                                     予約する
                                 </x-jet-button>
                             @endif
-                        </div>
-                    </form>
+                        @else
+                            <span class="text-xs">このイベントは既に予約済みです。</span>
+                        @endif
                 </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>
