@@ -30,6 +30,12 @@ class MyPageController extends Controller
             ->where('event_id', '=', $id)
             ->latest()
             ->first();
+
+        if ($reservation === null) {
+            session()->flash('status', 'このイベントに予約をしていません。');
+
+            return to_route('dashboard');
+        }
         // dd($reservation);
 
         return view('mypage.show', compact('event', 'reservation'));
